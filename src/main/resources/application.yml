@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: root
+application:
+  security:
+    jwt:
+      SECRET_KEY: cdge07e9f410f80eff1a031eb91058447659c70c86216873ebcfe1455feb7a5c
+      #1 day
+      expiration: 86400000
+      #7 days
+      refresh-token:
+        expiration: 604800000
+  admin:
+    login: admin
+    password: 62p0KEkLxT
