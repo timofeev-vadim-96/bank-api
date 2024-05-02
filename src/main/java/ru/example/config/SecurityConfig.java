@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.config;
+package ru.example.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.infinitesynergy.bankapi.service.UserService;
+import ru.example.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -36,14 +36,14 @@ public class SecurityConfig {
                         .requestMatchers("/signup/**", "/signin/**").permitAll()
                         .anyRequest().authenticated()//любой иной запрос должен быть аутентифицирован
                 )
-                .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //политика создания сессий
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //политика создания сессий
                 .authenticationProvider(authenticationProvider()) //устанавливаем свои правила аутентификации
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); //добавляем кастомный фильтр перед другим
         return http.build();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder); //логика кодирования
         daoAuthenticationProvider.setUserDetailsService(userDetailsService()); //логика получения юзеров
@@ -55,7 +55,7 @@ public class SecurityConfig {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-                return userService.findUserByLogin(login).orElseThrow(()-> new UsernameNotFoundException(""));
+                return userService.findUserByLogin(login).orElseThrow(() -> new UsernameNotFoundException(""));
             }
         };
     }

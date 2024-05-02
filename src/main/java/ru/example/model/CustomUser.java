@@ -1,8 +1,8 @@
-package ru.infinitesynergy.bankapi.model;
+package ru.example.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import ru.infinitesynergy.bankapi.util.Role;
+import ru.example.util.Role;
 
 @Data
 @Builder

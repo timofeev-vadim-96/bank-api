@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.service;
+package ru.example.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.infinitesynergy.bankapi.dao.UserRepository;
-import ru.infinitesynergy.bankapi.dto.TransferDto;
-import ru.infinitesynergy.bankapi.dto.AuthenticationRequest;
-import ru.infinitesynergy.bankapi.model.CustomUser;
-import ru.infinitesynergy.bankapi.util.Role;
+import ru.example.dao.UserRepository;
+import ru.example.dto.TransferDto;
+import ru.example.dto.AuthenticationRequest;
+import ru.example.model.CustomUser;
+import ru.example.util.Role;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class UserService {
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
 
-    public Optional<CustomUser> registerNewUser(AuthenticationRequest authenticationRequest, Role role, double debitBalance){
+    public Optional<CustomUser> registerNewUser(AuthenticationRequest authenticationRequest, Role role, double debitBalance) {
         CustomUser customUser = CustomUser.builder()
                 .login(authenticationRequest.login())
                 .password(passwordEncoder.encode(authenticationRequest.password()))
@@ -31,19 +31,19 @@ public class UserService {
         return userDao.registerNewUser(customUser);
     }
 
-    public Optional<CustomUser> registerNewUser(AuthenticationRequest authenticationRequest){
+    public Optional<CustomUser> registerNewUser(AuthenticationRequest authenticationRequest) {
         return registerNewUser(authenticationRequest, Role.USER, 0);
     }
 
-    public boolean transferMoney(String from, TransferDto transferDto){
+    public boolean transferMoney(String from, TransferDto transferDto) {
         return userDao.transferMoney(from, transferDto.recipientLogin(), transferDto.amount());
     }
 
-    public Optional<Double> getBalance(String login){
+    public Optional<Double> getBalance(String login) {
         return userDao.getUserBalance(login);
     }
 
-    public Optional<UserDetails> findUserByLogin(String login){
+    public Optional<UserDetails> findUserByLogin(String login) {
         Optional<CustomUser> userOptional = userDao.findUserByLogin(login);
         if (userOptional.isEmpty()) return Optional.empty();
         else {

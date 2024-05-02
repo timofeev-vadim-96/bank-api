@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.controller;
+package ru.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,15 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import ru.infinitesynergy.bankapi.dto.TransferDto;
-import ru.infinitesynergy.bankapi.dto.AuthenticationRequest;
-import ru.infinitesynergy.bankapi.model.CustomUser;
-import ru.infinitesynergy.bankapi.service.JwtService;
-import ru.infinitesynergy.bankapi.service.UserService;
+import ru.example.dto.TransferDto;
+import ru.example.model.CustomUser;
+import ru.example.service.UserService;
+import ru.example.dto.AuthenticationRequest;
+import ru.example.service.JwtService;
 
 import java.util.Optional;
 

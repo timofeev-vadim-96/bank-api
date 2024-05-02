@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.service;
+package ru.example.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtService {
 
     @Value("${application.security.jwt.SECRET_KEY}")
-    private  String SECRET_KEY;
+    private String SECRET_KEY;
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
     @Value("${application.security.jwt.refresh-token.expiration}")
@@ -33,11 +33,11 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails){
-        return buildToken(Map.of("authorities", userDetails.getAuthorities()), userDetails,jwtExpiration);
+    public String generateToken(UserDetails userDetails) {
+        return buildToken(Map.of("authorities", userDetails.getAuthorities()), userDetails, jwtExpiration);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts
                 .builder()
                 .claims(extraClaims) //устанавливаем доп. заголовки
@@ -51,12 +51,12 @@ public class JwtService {
     /**
      * Проверка на то, что имя пользователя соответствует и время действия токена не истекло
      */
-    public boolean isTokenValid(String token, UserDetails userDetails){
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public boolean isTokenExpired(String token){
+    public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 

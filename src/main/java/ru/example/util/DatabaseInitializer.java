@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.util;
+package ru.example.util;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,12 +8,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import ru.infinitesynergy.bankapi.dto.AuthenticationRequest;
-import ru.infinitesynergy.bankapi.service.UserService;
-
-import java.util.Optional;
+import ru.example.service.UserService;
+import ru.example.dto.AuthenticationRequest;
 
 @Component
 @RequiredArgsConstructor

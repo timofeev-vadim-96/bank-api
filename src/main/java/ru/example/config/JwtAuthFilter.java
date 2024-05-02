@@ -1,4 +1,4 @@
-package ru.infinitesynergy.bankapi.config;
+package ru.example.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.infinitesynergy.bankapi.service.JwtService;
-import ru.infinitesynergy.bankapi.service.UserService;
+import ru.example.service.UserService;
+import ru.example.service.JwtService;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String jwtToken;
 
         //если в заголовках нет токена авторизации
-        if (authHeader == null || !authHeader.startsWith("Bearer")){
+        if (authHeader == null || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);
             return;
         }
