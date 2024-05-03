@@ -20,6 +20,7 @@ target/
 *.ipr
 mvnw
 mvnw.cmd
+tz.md
 
 ### NetBeans ###
 /nbproject/private/
